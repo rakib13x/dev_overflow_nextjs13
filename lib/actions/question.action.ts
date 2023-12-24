@@ -59,7 +59,7 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     // create an interaction record for the user's ask_question action
 
-    //Increment author's reputation by +5 for creating a question
+    // Increment author's reputation by +5 for creating a question
     console.log(path);
     revalidatePath(path);
   } catch (error) {}
