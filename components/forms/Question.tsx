@@ -20,7 +20,6 @@ import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
 import { useRouter, usePathname } from "next/navigation";
-import { Router } from "lucide-react";
 
 const type: any = "create";
 
@@ -34,7 +33,7 @@ const Question = ({ mongoUserId }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  //1. Define your form
+  // 1. Define your form
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
@@ -61,7 +60,7 @@ const Question = ({ mongoUserId }: Props) => {
         path: pathname,
       });
 
-      //navigate to homepage
+      // navigate to homepage
       router.push("/");
     } catch (error) {
     } finally {
