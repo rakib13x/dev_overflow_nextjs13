@@ -61,15 +61,15 @@ const QuestionCard = ({
       </div>
 
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
-        <Metric
-          imgUrl="/assets/icons/avatar.svg"
-          alt="user"
-          value={author.name}
-          title={`- asked ${getTimestamp(createdAt)}`}
-          href={`/profile/${author._id}`}
-          isAuthor=""
-          textStyles="body-medium text-dark400_light700"
-        />
+        {/* <Metric
+          // imgUrl="/assets/icons/avatar.svg"
+          // alt="user"
+          // value={author.name}
+          // title={`- asked ${getTimestamp(createdAt)}`}
+          // href={`/profile/${author._id}`}
+          // isAuthor=""
+          // textStyles="body-medium text-dark400_light700"
+        /> */}
         <Metric
           imgUrl="/assets/icons/like.svg"
           alt="Upvotes"
