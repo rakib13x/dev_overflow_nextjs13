@@ -28,8 +28,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     handleThemeChange();
   }, [mode]);
 
-  console.log("current mode is:", mode);
-
   return (
     <ThemeContext.Provider value={{ mode, setMode }}>
       {children}
