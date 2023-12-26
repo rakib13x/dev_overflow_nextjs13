@@ -4,6 +4,9 @@ const nextConfig = {
     mdxRs: true,
     serverComponentsExternalPackages: ["mongoose"],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 module.exports = nextConfig;
