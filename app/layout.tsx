@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 
-import "./globals.css";
-import React from "react";
 import { ThemeProvider } from "@/context/ThemeProvider";
+import "../styles/prism.css";
+import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
