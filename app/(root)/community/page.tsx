@@ -1,5 +1,6 @@
 import Filter from "@/components/Shared/Filter";
 import LocalSearchBar from "@/components/Shared/search/LocalSearchBar";
+import UserCard from "@/components/cards/UserCard";
 
 import { UserFilters } from "@/constants/filters";
 import { getAllUsers } from "@/lib/actions/user.action";
