@@ -1,4 +1,5 @@
 import Filter from "@/components/Shared/Filter";
+import Pagination from "@/components/Shared/Pagination";
 import LocalSearchBar from "@/components/Shared/search/LocalSearchBar";
 import UserCard from "@/components/cards/UserCard";
 
