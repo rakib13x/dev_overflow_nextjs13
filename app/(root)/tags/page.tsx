@@ -2,7 +2,6 @@ import Filter from "@/components/Shared/Filter";
 import NoResult from "@/components/Shared/NoResult";
 import Pagination from "@/components/Shared/Pagination";
 import LocalSearchBar from "@/components/Shared/search/LocalSearchBar";
-
 import { TagFilters } from "@/constants/filters";
 import { getAllTags } from "@/lib/actions/tag.actions";
 import { SearchParamsProps } from "@/types";
