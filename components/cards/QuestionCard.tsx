@@ -1,8 +1,7 @@
-import Link from "next/link";
-import React from "react";
-import RenderTag from "../Shared/RenderTag";
-import Metric from "../Shared/Metric";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
+import Link from "next/link";
+import Metric from "../Shared/Metric";
+import RenderTag from "../Shared/RenderTag";
 
 interface QuestionProps {
   _id: string;
@@ -71,7 +70,7 @@ const QuestionCard = ({
           // textStyles="body-medium text-dark400_light700"
         /> */}
         <Metric
-          imgUrl="/assets/icons/like.svg"
+          imgUrl={author?.picture}
           alt="Upvotes"
           value={formatAndDivideNumber(upvotes)}
           title="Votes"
