@@ -1,3 +1,4 @@
+import AllAnswers from "@/components/Shared/AllAnswers";
 import Metric from "@/components/Shared/Metric";
 import RenderTag from "@/components/Shared/RenderTag";
 import Answer from "@/components/forms/Answer";
@@ -78,6 +79,14 @@ const Page = async ({ params, searchParams }: any) => {
           />
         ))}
       </div>
+
+      <AllAnswers
+        questionId={result._id}
+        userId={mongoUser._id}
+        totalAnswers={result.answers.length}
+        page={searchParams?.page}
+        filter={searchParams?.filter}
+      />
 
       <Answer
         question={result.content}
