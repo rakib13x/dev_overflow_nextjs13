@@ -1,5 +1,6 @@
 import Metric from "@/components/Shared/Metric";
 import RenderTag from "@/components/Shared/RenderTag";
+import Answer from "@/components/forms/Answer";
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getUserById } from "@/lib/actions/user.action";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
@@ -77,6 +78,12 @@ const Page = async ({ params, searchParams }: any) => {
           />
         ))}
       </div>
+
+      <Answer
+        question={result.content}
+        questionId={JSON.stringify(result._id)}
+        authorId={JSON.stringify(mongoUser._id)}
+      />
     </>
   );
 };
