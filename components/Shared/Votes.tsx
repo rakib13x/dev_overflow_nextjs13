@@ -22,6 +22,10 @@ const Votes = ({
   hasdownVoted,
   hasSaved,
 }: Props) => {
+  const handleSave = async () => {};
+
+  const handleVote = async (action: string) => {};
+
   return (
     <div className="flex gap-5">
       <div className="flex-center gap-2.5">
@@ -36,6 +40,7 @@ const Votes = ({
             height={18}
             alt="upvote"
             className="cursor-pointer"
+            onClick={() => handleVote("upvote")}
           />
 
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
@@ -56,6 +61,7 @@ const Votes = ({
             height={18}
             alt="downvote"
             className="cursor-pointer"
+            onClick={() => handleVote("downvote")}
           />
 
           <div className="flex-center background-light700_dark400 min-w-[18px] rounded-sm p-1">
