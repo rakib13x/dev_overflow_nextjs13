@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import ProfileLink from "@/components/Shared/ProfileLink";
+import QuestionTab from "@/components/Shared/QuestionTab";
 import Stats from "@/components/Shared/Stats";
 import { getJoinedDate } from "@/lib/utils";
 
@@ -96,7 +97,11 @@ const Page = async ({ params, searchParams }: URLProps) => {
             value="top-posts"
             className="mt-5 flex w-full flex-col gap-6"
           >
-            QuestionTab
+            <QuestionTab
+              searchParams={searchParams}
+              userId={userInfo.user._id}
+              clerkId={clerkId}
+            />
           </TabsContent>
           <TabsContent value="answers" className="flex w-full flex-col gap-6">
             AnswerTab

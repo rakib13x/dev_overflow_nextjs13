@@ -1,10 +1,8 @@
 import Link from "next/link";
-import React from "react";
 
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
-import { SignedIn } from "@clerk/nextjs";
-import RenderTag from "../Shared/RenderTag";
 import Metric from "../Shared/Metric";
+import RenderTag from "../Shared/RenderTag";
 
 interface QuestionProps {
   _id: string;
@@ -62,11 +60,11 @@ const QuestionCard = ({
 
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
-          imgUrl={author.picture}
+          imgUrl={author?.picture}
           alt="user"
-          value={author.name}
+          value={author?.name}
           title={` - asked ${getTimestamp(createdAt)}`}
-          href={`/profile/${author._id}`}
+          href={`/profile/${author?._id}`}
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />
