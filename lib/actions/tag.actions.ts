@@ -77,3 +77,5 @@ export async function getAllTags(params: GetAllTagsParams) {
     throw error;
   }
 }
+
+export async function getQuestionsByTagId() {}
