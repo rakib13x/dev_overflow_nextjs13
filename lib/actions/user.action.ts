@@ -1,6 +1,7 @@
 "use server";
 
 import Question from "@/database/question.model";
+import Tag from "@/database/tag.model";
 import User from "@/database/user.model";
 import { FilterQuery } from "mongoose";
 import { revalidatePath } from "next/cache";
@@ -9,6 +10,7 @@ import {
   CreateUserParams,
   DeleteUserParams,
   GetAllUsersParams,
+  GetSavedQuestionsParams,
   ToggleSaveQuestionParams,
   UpdateUserParams,
 } from "./shared.types";

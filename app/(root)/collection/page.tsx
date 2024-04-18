@@ -2,12 +2,24 @@ import Filter from "@/components/Shared/Filter";
 import NoResult from "@/components/Shared/NoResult";
 import LocalSearchBar from "@/components/Shared/search/LocalSearchBar";
 import QuestionCard from "@/components/cards/QuestionCard";
+
 import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
 import { SearchParamsProps } from "@/types";
+import { auth } from "@clerk/nextjs";
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const result = await getSavedQuestions();
+  const { userId } = auth();
+
+  if (!userId) return null;
+
+  const result = await getSavedQuestions({
+    clerkId: userId,
+    searchQuery: searchParams.q,
+    filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
+  });
+
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
