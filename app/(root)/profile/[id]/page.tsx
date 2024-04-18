@@ -1,9 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getUserInfo } from "@/lib/actions/user.action";
 import { URLProps } from "@/types";
 import { SignedIn, auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+
+import ProfileLink from "@/components/Shared/ProfileLink";
+import { getJoinedDate } from "@/lib/utils";
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
@@ -30,9 +34,25 @@ const Page = async ({ params, searchParams }: URLProps) => {
             </p>
 
             <div className="mt-5 flex flex-wrap items-center justify-start gap-5">
-              {userInfo.user.portfolioWebsite}
+              {userInfo.user.portfolioWebsite && (
+                <ProfileLink
+                  imgUrl="/assets/icons/link.svg"
+                  href={userInfo.user.portfolioWebsite}
+                  title="Portfolio"
+                />
+              )}
 
-              {userInfo.user.location}
+              {userInfo.user.location && (
+                <ProfileLink
+                  imgUrl="/assets/icons/location.svg"
+                  title={userInfo.user.location}
+                />
+              )}
+
+              <ProfileLink
+                imgUrl="/assets/icons/calendar.svg"
+                title={getJoinedDate(userInfo.user.joinedAt)}
+              />
             </div>
 
             {userInfo.user.bio && (
@@ -54,6 +74,28 @@ const Page = async ({ params, searchParams }: URLProps) => {
             )}
           </SignedIn>
         </div>
+      </div>
+      Stats
+      <div className="mt-10 flex gap-10">
+        <Tabs defaultValue="top-posts" className="flex-1">
+          <TabsList className="background-light800_dark400 min-h-[42px] p-1">
+            <TabsTrigger value="top-posts" className="tab">
+              Top Posts
+            </TabsTrigger>
+            <TabsTrigger value="answers" className="tab">
+              Answers
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent
+            value="top-posts"
+            className="mt-5 flex w-full flex-col gap-6"
+          >
+            QuestionTab
+          </TabsContent>
+          <TabsContent value="answers" className="flex w-full flex-col gap-6">
+            AnswerTab
+          </TabsContent>
+        </Tabs>
       </div>
     </>
   );
