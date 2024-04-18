@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 interface MetricProps {
   imgUrl: string;
@@ -9,7 +8,7 @@ interface MetricProps {
   title: string;
   href?: string;
   textStyles?: string;
-  isAuthor?: string;
+  isAuthor?: boolean;
 }
 
 const Metric = ({
