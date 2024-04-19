@@ -73,10 +73,9 @@ export async function createQuestion(params: CreateQuestionParams) {
   try {
     connectToDatabase();
 
-    /** we have to des everything we pass from our ask question form */
     const { title, content, tags, author, path } = params;
 
-    // create the question
+    // Create the question
     const question = await Question.create({
       title,
       content,
@@ -85,29 +84,36 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     const tagDocuments = [];
 
-    // create the tags or get them if they already exist
+    // Create the tags or get them if they already exist
     for (const tag of tags) {
       const existingTag = await Tag.findOneAndUpdate(
-        { name: { $regex: new RegExp(`^${tag}$, "i"`) } },
-        { $setOnInsert: { name: tag }, $push: { question: question._id } },
+        { name: { $regex: new RegExp(`^${tag}$`, "i") } },
+        { $setOnInsert: { name: tag }, $push: { questions: question._id } },
         { upsert: true, new: true }
       );
 
       tagDocuments.push(existingTag._id);
     }
 
-    // update the question
-
     await Question.findByIdAndUpdate(question._id, {
-      $push: { tags: { $search: tagDocuments } },
+      $push: { tags: { $each: tagDocuments } },
     });
 
-    // create an interaction record for the user's ask_question action
+    // Create an interaction record for the user's ask_question action
+    await Interaction.create({
+      user: author,
+      action: "ask_question",
+      question: question._id,
+      tags: tagDocuments,
+    });
 
     // Increment author's reputation by +5 for creating a question
-    console.log(path);
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 5 } });
+
     revalidatePath(path);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function getQuestionById(params: GetQuestionByIdParams) {
