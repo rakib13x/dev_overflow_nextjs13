@@ -1,9 +1,4 @@
 "use client";
-import React, { useRef, useState } from "react";
-import { Editor } from "@tinymce/tinymce-react";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,16 +10,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { QuestionsSchema } from "@/lib/validations";
-import { Badge } from "../ui/badge";
-import Image from "next/image";
 import { createQuestion } from "@/lib/actions/question.action";
-import { useRouter, usePathname } from "next/navigation";
+import { QuestionsSchema } from "@/lib/validations";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Editor } from "@tinymce/tinymce-react";
+import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { Badge } from "../ui/badge";
 
 const type: any = "create";
 
 interface Props {
+  type?: string;
   mongoUserId: string;
+  questionDetails?: string;
 }
 
 const Question = ({ mongoUserId }: Props) => {
