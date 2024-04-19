@@ -1,12 +1,11 @@
 "use client";
 
+import { globalSearch } from "@/lib/actions/general.action";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
-import { globalSearch } from "@/lib/actions/general.action";
 import GlobalFilters from "./GlobalFilters";
 
 const GlobalResult = () => {
@@ -28,8 +27,9 @@ const GlobalResult = () => {
       setIsLoading(true);
 
       try {
-        //Global search
-        const res = await globalSearch();
+        const res = await globalSearch({ query: global, type });
+
+        setResult(JSON.parse(res));
       } catch (error) {
         console.error(error);
         throw error;
