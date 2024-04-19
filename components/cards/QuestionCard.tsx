@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
+import { SignedIn } from "@clerk/nextjs";
+import EditDeleteAction from "../Shared/EditDeleteAction";
 import Metric from "../Shared/Metric";
 import RenderTag from "../Shared/RenderTag";
 
@@ -50,6 +52,8 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
+
+        <SignedIn>{showActionButtons && <EditDeleteAction />}</SignedIn>
       </div>
 
       <div className="mt-3.5 flex flex-wrap gap-2">
