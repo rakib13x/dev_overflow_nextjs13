@@ -25,7 +25,9 @@ export async function getUserById(params: any) {
     connectToDatabase();
 
     const { userId } = params;
+
     const user = await User.findOne({ clerkId: userId });
+
     return user;
   } catch (error) {
     console.log(error);
@@ -37,18 +39,15 @@ export async function createUser(userData: CreateUserParams) {
   try {
     connectToDatabase();
 
-    const newUser = await User.create({
-      ...userData,
-      password: "defaultPassword",
-    });
+    const newUser = await User.create(userData);
 
-    console.log("User created:", newUser);
     return newUser;
   } catch (error) {
-    console.error("Error creating user:", error);
+    console.log(error);
     throw error;
   }
 }
+
 export async function updateUser(params: UpdateUserParams) {
   try {
     connectToDatabase();
@@ -69,20 +68,20 @@ export async function updateUser(params: UpdateUserParams) {
 export async function deleteUser(params: DeleteUserParams) {
   try {
     connectToDatabase();
+
     const { clerkId } = params;
 
     const user = await User.findOneAndDelete({ clerkId });
+
     if (!user) {
       throw new Error("User not found");
     }
 
     // Delete user from database
-    // and questions , answers, comments, etc.
+    // and questions, answers, comments, etc.
 
     // get user question ids
-    // const userQuestionIds = await Question.find({ author: user._id }).distinct(
-    // "_id"
-    // );
+    // const userQuestionIds = await Question.find({ author: user._id}).distinct('_id');
 
     // delete user questions
     await Question.deleteMany({ author: user._id });
@@ -90,8 +89,12 @@ export async function deleteUser(params: DeleteUserParams) {
     // TODO: delete user answers, comments, etc.
 
     const deletedUser = await User.findByIdAndDelete(user._id);
+
     return deletedUser;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
 
 export async function getAllUsers(params: GetAllUsersParams) {
@@ -352,6 +355,32 @@ export async function getUserQuestions(params: GetUserStatsParams) {
     const isNextQuestions = totalQuestions > skipAmount + userQuestions.length;
 
     return { totalQuestions, questions: userQuestions, isNextQuestions };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getUserAnswers(params: GetUserStatsParams) {
+  try {
+    connectToDatabase();
+
+    const { userId, page = 1, pageSize = 10 } = params;
+
+    const skipAmount = (page - 1) * pageSize;
+
+    const totalAnswers = await Answer.countDocuments({ author: userId });
+
+    const userAnswers = await Answer.find({ author: userId })
+      .sort({ upvotes: -1 })
+      .skip(skipAmount)
+      .limit(pageSize)
+      .populate("question", "_id title")
+      .populate("author", "_id clerkId name picture");
+
+    const isNextAnswer = totalAnswers > skipAmount + userAnswers.length;
+
+    return { totalAnswers, answers: userAnswers, isNextAnswer };
   } catch (error) {
     console.log(error);
     throw error;

@@ -1,4 +1,4 @@
-import { Schema, models, model, Document } from "mongoose";
+import { Document, Schema, model, models } from "mongoose";
 
 export interface IUser extends Document {
   clerkId: string;
@@ -8,9 +8,9 @@ export interface IUser extends Document {
   password?: string;
   bio?: string;
   picture: string;
-  localtion?: string;
+  location?: string;
   portfolioWebsite?: string;
-  reputation?: string;
+  reputation?: number;
   saved: Schema.Types.ObjectId[];
   joinedAt: Date;
 }
@@ -29,8 +29,6 @@ const UserSchema = new Schema({
   saved: [{ type: Schema.Types.ObjectId, ref: "Question" }],
   joinedAt: { type: Date, default: Date.now },
 });
-
-// to check if the model already exist if not we can create it by saying model("Question", QuestionSchema);
 
 const User = models.User || model("User", UserSchema);
 
