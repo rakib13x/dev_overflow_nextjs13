@@ -12,6 +12,8 @@ import {
   GetQuestionsParams,
   QuestionVoteParams,
 } from "./shared.types";
+import Answer from "@/database/answer.model";
+import Interaction from "@/database/interaction.model";
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -186,7 +188,8 @@ export async function deleteQuestion(params: DeleteQuestionParams) {
     const { questionId, path } = params;
 
     await Question.deleteOne({ _id: questionId });
-
+    await Answer.deleteMany({ question: questionId });
+    await Interaction.deleteMany({ question: questionId });
     await Tag.updateMany(
       { questions: questionId },
       { $pull: { questions: questionId } }
