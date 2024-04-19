@@ -1,16 +1,10 @@
+import { getHotQuestions } from "@/lib/actions/question.action";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import RenderTag from "./RenderTag";
 
-const RightSideBar = () => {
-  const hotQuestions = [
-    { _id: "1", title: "How do I use express as custom server in Nextjs?" },
-    { _id: "2", title: "How do I use express as custom server in Nextjs?" },
-    { _id: "3", title: "How do I use express as custom server in Nextjs?" },
-    { _id: "4", title: "How do I use express as custom server in Nextjs?" },
-    { _id: "5", title: "How do I use express as custom server in Nextjs?" },
-  ];
+const RightSideBar = async () => {
+  const hotQuestions = await getHotQuestions();
 
   const popularTag = [
     {
@@ -51,7 +45,7 @@ const RightSideBar = () => {
         <div className="mt-7 flex w-full flex-col gap-[30px]">
           {hotQuestions.map((question) => (
             <Link
-              href={`/questions/${question._id}`}
+              href={`/question/${question._id}`}
               key={question._id}
               className="flex cursor-pointer items-center justify-between gap-7"
             >
