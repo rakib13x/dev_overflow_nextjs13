@@ -12,7 +12,6 @@ const AnswersTab = async ({ userId, clerkId }: Props) => {
     userId,
   });
 
-  console.log(result);
   return (
     <>
       {result.answers.map((item) => (

@@ -6,6 +6,7 @@ import { SignedIn, auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
+import AnswersTab from "@/components/Shared/AnswersTab";
 import ProfileLink from "@/components/Shared/ProfileLink";
 import QuestionTab from "@/components/Shared/QuestionTab";
 import Stats from "@/components/Shared/Stats";
@@ -104,7 +105,11 @@ const Page = async ({ params, searchParams }: URLProps) => {
             />
           </TabsContent>
           <TabsContent value="answers" className="flex w-full flex-col gap-6">
-            AnswerTab
+            <AnswersTab
+              searchParams={searchParams}
+              userId={userInfo.user._id}
+              clerkId={clerkId}
+            />
           </TabsContent>
         </Tabs>
       </div>
