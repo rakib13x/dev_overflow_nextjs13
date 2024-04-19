@@ -1,5 +1,6 @@
 import Filter from "@/components/Shared/Filter";
 import NoResult from "@/components/Shared/NoResult";
+import Pagination from "@/components/Shared/Pagination";
 import LocalSearchbar from "@/components/Shared/search/LocalSearchBar";
 import QuestionCard from "@/components/cards/QuestionCard";
 import { QuestionFilters } from "@/constants/filters";
@@ -61,6 +62,13 @@ export default async function Home({ searchParams }: SearchParamsProps) {
             linkTitle="Ask a Question"
           />
         )}
+      </div>
+
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNext}
+        />
       </div>
     </>
   );
