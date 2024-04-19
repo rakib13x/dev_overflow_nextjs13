@@ -10,6 +10,7 @@ import { connectToDatabase } from "../mongoose";
 import {
   CreateQuestionParams,
   DeleteQuestionParams,
+  EditQuestionParams,
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
