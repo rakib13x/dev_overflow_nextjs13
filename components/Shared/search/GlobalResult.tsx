@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { globalSearch } from "@/lib/actions/general.action";
 import GlobalFilters from "./GlobalFilters";
 
 const GlobalResult = () => {
@@ -28,6 +29,7 @@ const GlobalResult = () => {
 
       try {
         //Global search
+        const res = await globalSearch();
       } catch (error) {
         console.error(error);
         throw error;
