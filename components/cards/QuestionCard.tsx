@@ -39,6 +39,8 @@ const QuestionCard = ({
 }: QuestionProps) => {
   const showActionButtons = clerkId && clerkId === author.clerkId;
 
+  console.log(clerkId);
+
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -54,9 +56,7 @@ const QuestionCard = ({
         </div>
 
         <SignedIn>
-          {showActionButtons && (
-            <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
-          )}
+          <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
         </SignedIn>
       </div>
 
