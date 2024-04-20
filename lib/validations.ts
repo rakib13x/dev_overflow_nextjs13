@@ -9,7 +9,7 @@ export const QuestionsSchema = z.object({
 });
 
 export const AnswerSchema = z.object({
-  answer: z.string().min(100),
+  answer: z.string().min(6, { message: "Answer must contain 6 characters" }),
 });
 
 export const ProfileSchema = z.object({
