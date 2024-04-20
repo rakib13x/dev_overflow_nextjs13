@@ -1,10 +1,16 @@
-import Link from "next/link";
-
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import { SignedIn } from "@clerk/nextjs";
+import Link from "next/link";
 import EditDeleteAction from "../Shared/EditDeleteAction";
 import Metric from "../Shared/Metric";
 import RenderTag from "../Shared/RenderTag";
+
+interface Author {
+  _id: string;
+  name: string;
+  picture: string;
+  clerkId: string;
+}
 
 interface QuestionProps {
   _id: string;
@@ -13,12 +19,7 @@ interface QuestionProps {
     _id: string;
     name: string;
   }[];
-  author: {
-    _id: string;
-    name: string;
-    picture: string;
-    clerkId: string;
-  };
+  author: Author[]; // Make author an array of Author objects
   upvotes: string[];
   views: number;
   answers: Array<object>;
@@ -37,9 +38,10 @@ const QuestionCard = ({
   answers,
   createdAt,
 }: QuestionProps) => {
-  const showActionButtons = clerkId && clerkId === author.clerkId;
+  const authorObject = author[0];
 
-  console.log(clerkId);
+  const showActionButtons =
+    clerkId && authorObject && clerkId === authorObject?.clerkId;
 
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
@@ -56,7 +58,9 @@ const QuestionCard = ({
         </div>
 
         <SignedIn>
-          <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
+          {showActionButtons && (
+            <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
+          )}
         </SignedIn>
       </div>
 
@@ -68,11 +72,11 @@ const QuestionCard = ({
 
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
-          imgUrl={author?.picture}
+          imgUrl={authorObject?.picture}
           alt="user"
-          value={author?.name}
+          value={authorObject?.name}
           title={` - asked ${getTimestamp(createdAt)}`}
-          href={`/profile/${author?._id}`}
+          href={`/profile/${authorObject?.clerkId}`}
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />
