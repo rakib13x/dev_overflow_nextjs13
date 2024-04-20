@@ -10,6 +10,10 @@ export const UserFilters = [
   { name: "Old Users", value: "old_users" },
   { name: "Top Contributors", value: "top_contributors" },
 ];
+export const JobsFilters = [
+  { name: "New Jobs", value: "new_users" },
+  { name: "Old Jobs", value: "old_users" },
+];
 
 export const QuestionFilters = [
   { name: "Most Recent", value: "most_recent" },
