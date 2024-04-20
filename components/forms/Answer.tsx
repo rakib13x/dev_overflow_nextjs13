@@ -79,7 +79,10 @@ const Answer = ({ question, questionId, authorId }: Props) => {
 
       const aiAnswer = await response.json();
 
-      const formattedAnswer = aiAnswer.reply.replace(/\n/g, "<br />");
+      // Check if aiAnswer.reply exists before accessing it
+      const formattedAnswer = aiAnswer.reply
+        ? aiAnswer.reply.replace(/\n/g, "<br />")
+        : "OpenAi api free tier isn't working now .That's why it can't genenrate ai answer for now.Sorry for your trouble.";
 
       if (editorRef.current) {
         const editor = editorRef.current as any;
