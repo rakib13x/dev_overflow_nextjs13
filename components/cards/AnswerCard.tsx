@@ -54,7 +54,7 @@ const AnswerCard = ({
         </SignedIn>
       </div>
 
-      <div className="flex-between mt-6 w-full flex-wrap gap-3">
+      <div className="flex-between mt-5 w-full flex-wrap gap-3">
         <Metric
           imgUrl={author.picture}
           alt="user avatar"
