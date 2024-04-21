@@ -2,8 +2,6 @@ import Filter from "@/components/Shared/Filter";
 import LocalSearchBar from "@/components/Shared/search/LocalSearchBar";
 
 import { JobsFilters } from "@/constants/filters";
-import { getAllUsers } from "@/lib/actions/user.action";
-import { SearchParamsProps } from "@/types";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -11,13 +9,7 @@ export const metadata: Metadata = {
   title: "Jobs | Dev Overflow",
 };
 
-const Page = async ({ searchParams }: SearchParamsProps) => {
-  const result = await getAllUsers({
-    searchQuery: searchParams.q,
-    filter: searchParams.filter,
-    page: searchParams.page ? +searchParams.page : 1,
-  });
-
+const Page = async () => {
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">Jobs</h1>
