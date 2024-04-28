@@ -20,7 +20,7 @@
 - Feature 4: Here user can earn points by asking or answering a question.
 - Feature 5: Here user can earn a badge by doing their activities.
 
----
+
 <p align="center">
   <strong>Technologies that I have used for building this Project:</strong>
 </p>
